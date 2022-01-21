@@ -2,6 +2,7 @@ import random
 
 # Check out --> http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
 # And the "Guess The Number" game on my Replit!
+# Insert difficulty levels like the one in replit has --> EASY, MEDIUM, HARD!
 
 # Let's assign guesses as 1 (because user has to guess at least once)
 # Let's also generate a random integer between 1 and 100
