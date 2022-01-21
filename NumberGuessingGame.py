@@ -1,7 +1,5 @@
 import random
 
-# To use global variables inside functions, write --> "global variable name" inside the function!
-
 # Let's assign guesses as 1 (because user has to guess at least once)
 # Let's also generate a random integer between 1 and 100
 guesses = 1
