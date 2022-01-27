@@ -1,65 +1,25 @@
 import random
+import user_hints, input_messages
 
 EASY_LEVEL_TURNS = 9
 MEDIUM_LEVEL_TURNS = 6
 HARD_LEVEL_TURNS = 3
 
-# Let's assign guesses as 1 (because user has to guess at least once)
-# Let's also generate a random integer between 1 and 100
+# MOVE ALL THAT'S BELOW TO THE BEGINNING OF THE game() FUNCTION WHEN EVERYTHING IS DONE!
 guesses = 1
-number = random.randint(1, 100)
+answer = random.randint(1, 100)
 
-# FOR TESTING PURPOSES, DELETE AFTER FINISHED PROJECT!
-print("\nThe computer generated this number:", number, "\n")
-# FOR TESTING PURPOSES, DELETE AFTER FINISHED PROJECT!
+print("\nThe computer generated this number:", answer, "\n")
 
-# Let's ask the user if they want to play a game
 play_game = str(input("Do you want to play a game? 'yes' or 'no': ")).lower()
-
-#def difficulty_level():
-    
-
-# Function for the first user hint
-def user_hint_1():
-    """
-    This function checks the number range of the computer generated number
-    from 'number_ranges' list and assigns it into the 'from_number' & 'to_number' variables.
-
-    After that, based on user input, the function shows a proper message to help the user move forward in the game.
-    """
-    number_ranges = [(1, 10), (11, 20), (21, 30), (31, 40), (41, 50), (51, 60), (61, 70), (71, 80), (81, 90), (91, 100)]
-
-    for num_range in number_ranges:
-        if number in range(num_range[0], num_range[1]):
-            from_number = num_range[0]
-            to_number = num_range[1]
-
-    if user_guess in range(from_number, to_number):
-        print(f"Not quite. But you're pretty close because the number is between {from_number} and {to_number}.")
-    else:
-        print(f"Nope. Let me give you the first hint, the number is between {from_number} and {to_number}.")
-
-
-def user_hint_2():
-    is_even_number = number % 2
-    if is_even_number == 0:
-        if user_guess % 2 == 0:
-            print("That's not the right number. But you're right, the number IS an even number.")
-        else:
-            print("Nope. My next tip is that the number IS an even number.")
-    else:
-        if user_guess % 2 == 0:
-            print("Nope. My next tip is that the number ISN'T an even number.")
-        else:
-            print("That's not the right number. But you're right, the number ISN'T an even number.")
-
+# MOVE ALL THAT'S ABOVE TO THE BEGINNING OF THE game() FUNCTION WHEN EVERYTHING IS DONE!
 
 wrong_input = True
-
 while wrong_input:
     if play_game == "no":
         wrong_input = False
-        play_game = str(input("Are you sure? The computer REALLY wants to play with you: ")).lower()
+        play_game = str(
+            input("Are you sure? The computer REALLY wants to play with you: ")).lower()
         if play_game == "no":
             print("""Oops, now you hurt the computer's feelings and it decided to leave to count zeros and ones.
                     However, the computer left one last message to you, but apparently it got so mad that it didn't bother to translate it completely...\n
@@ -82,19 +42,18 @@ while wrong_input:
         play_game = str(input("Sorry, I can't deliver that message to the computer \U0001F615 , so to (or not to) play the game, simply type 'yes' or 'no': ")).lower()
 
 if play_game == 'yes':
-    # THIS DOESN'T SEEM TO WORK...
-    while user_guess != number:
+    while user_guess != answer:
         if guesses < 2:
-            user_hint_1()
+            user_hints.user_hint_1(answer, user_guess)
         elif guesses < 3:
-            user_hint_2()
+            user_hints.user_hint_2(answer, user_guess)
 
         user_guess = int(input("Guess again: "))
-        guesses = guesses + 1
+        guesses += 1
 
     else:
         play_game = False
-        print(f"\nEXCELLENT! You guessed the number right, it was {number}. The computer praises you! \U0001F64C")
+        print(f"\nEXCELLENT! You guessed the number right, it was {answer}. The computer praises you! \U0001F64C")
         if guesses == 1:
             print(f"You got the number right with your first guess. THAT'S ASTONISHING, even the computer is amazed \U0001F632 \n")
         else:
@@ -102,6 +61,50 @@ if play_game == 'yes':
         print("The computer had one last message to you, but I wasn't able to translate it completely...")
         print('"You are such a 01100110 01110101 01101110 person!" ...Whatever that means? \U0001F914\n')
 
+
+def game():
+    
+    
+    play_game = input("Do you want to play a game? 'yes' or 'no': ").lower()
+    wrong_play_game_inputs = 0
+    user_plays_game = True
+    
+    
+    def restart():
+        """
+        The function for restarting the program.
+        """
+        
+        global user_plays_game
+        
+        restart = input("Would you like to restart the game, and erase the computer's memory? ")
+        if restart == "yes":
+            game()
+        elif restart == "no":
+            user_plays_game = False
+            print("Ok, I'll quit the program. Goodbye.")
+        else:
+            user_plays_game = False
+            print("Your input was confusing. Therefore I'll end the whole program.")
+        
+
+    while user_plays_game:
+        if play_game == "yes":
+            print("Let's play")
+        elif play_game == 'no':
+            print("Don't play")
+        else:
+            wrong_play_game_inputs += 1
+            input_messages.wrong_play_game_input(wrong_play_game_inputs)
+            if wrong_play_game_inputs == 4:
+                print("GAME OVER")
+                restart()
+                break
+            else:
+                play_game = input("Simply type 'yes' if you want to play and 'no' if you don't: ").lower()
+
+
+game()
 
 # TRY THIS WITH FLOAT, INT, STRING...
 
