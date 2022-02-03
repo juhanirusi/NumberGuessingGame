@@ -8,7 +8,7 @@ MEDIUM_LEVEL_TURNS = 6
 HARD_LEVEL_TURNS = 3
 
 # MOVE ALL THAT'S BELOW TO THE BEGINNING OF THE game() FUNCTION WHEN EVERYTHING IS DONE!
-guesses = 1
+guesses = 0
 answer = random.randint(1, 100)
 
 print("\nThe computer generated this number:", answer, "\n")
@@ -74,7 +74,6 @@ def game():
     wrong_game_inputs = 0
     user_plays_game = True
     first_no_input = True
-    user_guess_type = ""
     game_on = True
     
 
@@ -86,9 +85,9 @@ def game():
         global user_plays_game
 
         restart = input("Would you like to restart the game, and erase the computer's memory? ")
-        if restart == "yes":
+        if restart in ('y', 'yup', 'yes'):
             game()
-        elif restart == "no":
+        elif restart in ('n', 'no', 'nope'):
             user_plays_game = False
             print("Ok, I'll quit the program. Goodbye.")
         else:
@@ -97,29 +96,32 @@ def game():
             
 
     while user_plays_game:
-        if play_game == 'yes':
+        if play_game in ('y', 'yup', 'yes'):
             user_guess = input("Ok, the computer challenges you to guess a number between 1 and 100: ")
             
-            # FROM HERE...
-            input_messages.check_user_input(user_guess)
+            # FROM HERE (SEEMS TO WORK NOW)...
+            print(type(user_guess))
+            user_guess = input_messages.check_user_input(user_guess)
+            print(type(user_guess))
             
-            if type(input_messages.check_user_input(user_guess)) == int:
+            
+            if type(user_guess) == int:
                 user_guess = int(user_guess)
                 while game_on:
                     input_messages.user_guessed_number(user_guess)
                     user_guess = int(input("Guess again: "))
-            elif type(input_messages.check_user_input(user_guess)) == float:
-                print("seems to work with float")
-            elif type(input_messages.check_user_input(user_guess)) == str:
-                print("seems to work with str")
-            # ...TO HERE
+            elif type(user_guess) == float:
+                print("You inputted a float number, try again")
+            elif type(user_guess) == str:
+                print("You inputted a string, try again")
+            # ...TO HERE (SEEMS TO WORK NOW)
         
-        elif play_game == 'no':
+        elif play_game in ('n', 'no', 'nope'):
             if first_no_input:
                 play_game = str(input("Are you sure? The computer REALLY wants to play with you: ")).lower()
                 first_no_input = False
             input_messages.does_user_want_to_play(play_game)
-            if play_game == 'no':
+            if play_game in ('n', 'no', 'nope'):
                 print("GAME OVER")
                 restart()
                 break
