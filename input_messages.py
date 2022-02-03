@@ -42,4 +42,5 @@ def check_user_input(user_guess):
         except ValueError:
             user_guess = str(user_guess)
     finally:
+        print("Type inside function", type(user_guess))
         return user_guess
