@@ -63,7 +63,7 @@ print("\nThe computer generated this number:", answer, "\n")
 #             print(f"You got the number right with {guesses} guesses. GOOD JOB!\n")
 #         print("The computer had one last message to you, but I wasn't able to translate it completely...")
 #         print('"You are such a 01100110 01110101 01101110 person!" ...Whatever that means? \U0001F914\n')
-# TO HERE--------------------------------------------------------------------
+# TO HERE---------------------------------------------------------------------
 
 
 def game():
