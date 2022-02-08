@@ -64,18 +64,16 @@ print("\nThe computer generated this number:", answer, "\n")
 #         print("The computer had one last message to you, but I wasn't able to translate it completely...")
 #         print('"You are such a 01100110 01110101 01101110 person!" ...Whatever that means? \U0001F914\n')
 # TO HERE--------------------------------------------------------------------
-            
-            
 
 
 def game():
 
-    play_game = str(input("Do you want to play a game? 'yes' or 'no': ")).lower()
+    play_game = str(
+        input("Do you want to play a game? 'yes' or 'no': ")).lower()
     wrong_game_inputs = 0
     user_plays_game = True
     first_no_input = True
     game_on = True
-    
 
     def restart():
         """
@@ -84,7 +82,8 @@ def game():
 
         global user_plays_game
 
-        restart = input("Would you like to restart the game, and erase the computer's memory? ")
+        restart = input(
+            "Would you like to restart the game, and erase the computer's memory? ")
         if restart in ('y', 'yup', 'yes'):
             game()
         elif restart in ('n', 'no', 'nope'):
@@ -93,18 +92,17 @@ def game():
         else:
             user_plays_game = False
             print("Your input was confusing. Therefore I'll end the whole program.")
-            
 
     while user_plays_game:
         if play_game in ('y', 'yup', 'yes'):
-            user_guess = input("Ok, the computer challenges you to guess a number between 1 and 100: ")
-            
+            user_guess = input(
+                "Ok, the computer challenges you to guess a number between 1 and 100: ")
+
             # FROM HERE (SEEMS TO WORK NOW)...
             print(type(user_guess))
             user_guess = input_messages.check_user_input(user_guess)
             print(type(user_guess))
-            
-            
+
             if type(user_guess) == int:
                 user_guess = int(user_guess)
                 while game_on:
@@ -115,10 +113,11 @@ def game():
             elif type(user_guess) == str:
                 print("You inputted a string, try again")
             # ...TO HERE (SEEMS TO WORK NOW)
-        
+
         elif play_game in ('n', 'no', 'nope'):
             if first_no_input:
-                play_game = str(input("Are you sure? The computer REALLY wants to play with you: ")).lower()
+                play_game = str(
+                    input("Are you sure? The computer REALLY wants to play with you: ")).lower()
                 first_no_input = False
             input_messages.does_user_want_to_play(play_game)
             if play_game in ('n', 'no', 'nope'):
@@ -136,7 +135,8 @@ def game():
                 restart()
                 break
             else:
-                play_game = input("Simply type 'yes' if you want to play and 'no' if you don't: ").lower()
+                play_game = input(
+                    "Simply type 'yes' if you want to play and 'no' if you don't: ").lower()
 
 
 game()
