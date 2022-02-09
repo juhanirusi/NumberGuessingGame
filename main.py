@@ -74,7 +74,7 @@ def game():
     user_plays_game = True
     first_no_input = True
     first_guess = True
-    game_on = True
+    guesses = 0
 
     def restart():
         """
@@ -101,15 +101,28 @@ def game():
                 first_guess = False
             else:
                 user_guess = input_messages.check_user_input("Guess again: ")
-                
+
+            guesses += 1
 
             if type(user_guess) == int:
-                while game_on:
-                    input_messages.user_guessed_number(user_guess)
-            elif type(user_guess) == float:
-                print("You inputted a float number, try again...")
-            elif type(user_guess) == str:
-                print("You inputted a string, try again...")
+                input_messages.user_guessed_number(user_guess)
+                if user_guess != answer:
+                    continue
+                else:
+                    print(f"CONGRATULATIONS! You guessed the number right it was {answer}. The computer praises you! \U0001F64C")
+                    if guesses == 1:
+                        print(f"You got the number right with your first guess. THAT'S ASTONISHING, even the computer is amazed \U0001F632 \n")
+                    else:
+                        print(f"You got the number right with {guesses} guesses. GOOD JOB!\n")
+                    print("The computer had one last message to you, but I wasn't able to translate it completely...")
+                    print('"You are such a 01100110 01110101 01101110 person!" ...Whatever that means? \U0001F914\n')
+                    break
+
+            else:
+                if type(user_guess) == float:
+                    print("You inputted a float number, it NEEDS TO BE AN INTEGER! Try again...")
+                elif type(user_guess) == str:
+                    print("You inputted a string, it NEEDS TO BE AN INTEGER! Try again...")
 
         elif play_game in ('n', 'no', 'nope'):
             if first_no_input:

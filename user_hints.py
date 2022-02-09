@@ -22,7 +22,7 @@ def user_hint_1(answer, user_guess):
 def user_hint_2(answer, user_guess):
     """
     Checks whether the random number is an even or uneven number,
-    and is the user input a even or uneven number
+    and is the user input an even or uneven number
 
     After that, based on user input, the function shows a proper message to help the user move forward in the game.
     """
@@ -37,3 +37,5 @@ def user_hint_2(answer, user_guess):
             print("Nope. My next tip is that the number ISN'T an even number.")
         else:
             print("That's not the right number. But you're right, the number ISN'T an even number.")
+
+# HINT THAT TELLS THE USER WHAT ONE NUMBER (INT) THERE IS IN THE NUMBER
