@@ -1,79 +1,23 @@
 import random
 import user_hints
+import difficulty
 import input_messages
-import set_difficulty
-
-EASY_LEVEL_TURNS = 9
-MEDIUM_LEVEL_TURNS = 6
-HARD_LEVEL_TURNS = 3
-
-# TODO MOVE ALL THAT'S BELOW TO THE BEGINNING OF THE game() FUNCTION WHEN EVERYTHING IS DONE!
-guesses = 0
-answer = random.randint(1, 100)
-
-# TODO Remove after finished work
-print("\nThe computer generated this number:", answer, "\n")
-
-# play_game = str(input("Do you want to play a game? 'yes' or 'no': ")).lower()
-# MOVE ALL THAT'S ABOVE TO THE BEGINNING OF THE game() FUNCTION WHEN EVERYTHING IS DONE!
-
-
-# FROM HERE--------------------------------------------------------------------
-# wrong_input = True
-# while wrong_input:
-#     if play_game == "no":
-#         wrong_input = False
-#         play_game = str(input("Are you sure? The computer REALLY wants to play with you: ")).lower()
-#         if play_game == "no":
-#             print("""Oops, now you hurt the computer's feelings and it decided to leave to count zeros and ones.
-#                     However, the computer left one last message to you, but apparently it got so mad that it didn't bother to translate it completely...\n
-#                     "You are such a 01110000 01100001 01110010 01110100 01111001 00100000 01110000 01101111 01101111 01110000 01100101 01110010, and I don't never wanna play with you again!"
-#                     ...I have no idea what that means, \U0001F914 but the computer isn't happy. \U0001F620 \n""")
-#     elif play_game == "yes":
-#         wrong_input = False
-#         too_high_low_input = True
-#         user_guess = int(input("Ok, the computer challenges you to guess a number between 1 and 100: "))
-#         while too_high_low_input:
-#             if user_guess > 100:
-#                 user_guess = int(input("Well now you're going WAY over the roof. I can't take this to the computer when it explicitly said NUMBER BETWEEN 1 AND 100: "))
-#             elif user_guess < 1:
-#                 user_guess = int(input("Well now you're just messing with me. I can't take this to the computer when it explicitly said NUMBER BETWEEN 1 AND 100: "))
-#             elif user_guess == float:
-#                 user_guess = int(input("FLOAT: "))
-#             else:
-#                 too_high_low_input = False
-#     elif play_game != 'no' or 'yes':
-#         play_game = str(input("Sorry, I can't deliver that message to the computer \U0001F615 , so to (or not to) play the game, simply type 'yes' or 'no': ")).lower()
-
-# if play_game == 'yes':
-#     while user_guess != answer:
-#         if guesses < 2:
-#             user_hints.user_hint_1(answer, user_guess)
-#         elif guesses < 3:
-#             user_hints.user_hint_2(answer, user_guess)
-
-#         user_guess = int(input("Guess again: "))
-#         guesses += 1
-
-#     else:
-#         play_game = False
-#         print(f"\nEXCELLENT! You guessed the number right, it was {answer}. The computer praises you! \U0001F64C")
-#         if guesses == 1:
-#             print(f"You got the number right with your first guess. THAT'S ASTONISHING, even the computer is amazed \U0001F632 \n")
-#         else:
-#             print(f"You got the number right with {guesses} guesses. GOOD JOB!\n")
-#         print("The computer had one last message to you, but I wasn't able to translate it completely...")
-#         print('"You are such a 01100110 01110101 01101110 person!" ...Whatever that means? \U0001F914\n')
-# TO HERE---------------------------------------------------------------------
-
 
 def game():
 
+    answer = random.randint(1, 100)
+
+    print("\nThe computer generated this number:", answer, "\n")
+
+    # TODO Run only once --> AFTER RESTARTING DON'T RUN THIS CODE!
     play_game = str(input("Do you want to play a game? 'yes' or 'no': ")).lower()
+
+    difficulty_not_set = True
     wrong_game_inputs = 0
     user_plays_game = True
     first_no_input = True
     first_guess = True
+    user_hint = 0
     guesses = 0
 
     def restart():
@@ -95,27 +39,47 @@ def game():
 
     while user_plays_game:
         if play_game in ('y', 'yup', 'yes'):
-            
+            if difficulty_not_set:
+                guesses_left = difficulty.difficulty_level("Choose a difficulty. Type 'easy', 'medium' or 'hard': ")
+                difficulty_not_set = False
+
             if first_guess:
                 user_guess = input_messages.check_user_input("Ok, the computer challenges you to guess a number between 1 and 100: ")
                 first_guess = False
             else:
-                user_guess = input_messages.check_user_input("Guess again: ")
+                if guesses_left == 1:
+                    print(f"You only have {guesses_left} attempt remaining. MAKE IT COUNT!")
+                elif guesses_left > 1:
+                    print(f"You have still {guesses_left} attempts remaining to guess the right number.")
+                user_guess = input_messages.check_user_input("\nGuess again: ")
 
+            guesses_left -= 1
             guesses += 1
+
+            if guesses_left <= 0 and user_guess != answer:
+                print("\nOh no, you've ran out of guesses, and therefore, lost the game. \U0001F61E")
+                restart()
+                break
 
             if type(user_guess) == int:
                 input_messages.user_guessed_number(user_guess)
-                if user_guess != answer:
-                    continue
-                else:
-                    print(f"CONGRATULATIONS! You guessed the number right it was {answer}. The computer praises you! \U0001F64C")
+                if user_guess != answer and user_guess < 100 and user_guess > 0:
+                    user_hint += 1
+                    if user_hint == 1:
+                        user_hints.user_hint_1(answer, user_guess)
+                    elif user_hint == 2:
+                        user_hints.user_hint_2(answer, user_guess)
+                    elif user_hint == 3 and answer >= 10:
+                        user_hints.user_hint_3(answer)
+                elif user_guess == answer:
+                    print(f"\nCONGRATULATIONS! You guessed the number right it was {answer}. The computer praises you! \U0001F64C")
                     if guesses == 1:
                         print(f"You got the number right with your first guess. THAT'S ASTONISHING, even the computer is amazed \U0001F632 \n")
                     else:
                         print(f"You got the number right with {guesses} guesses. GOOD JOB!\n")
                     print("The computer had one last message to you, but I wasn't able to translate it completely...")
                     print('"You are such a 01100110 01110101 01101110 person!" ...Whatever that means? \U0001F914\n')
+                    restart()
                     break
 
             else:
