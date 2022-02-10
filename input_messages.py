@@ -28,13 +28,13 @@ def does_user_want_to_play(play_game):
 
 def user_guessed_number(user_guess):
     if user_guess > 100:
-        print("Well now you're going WAY over the roof. I can't take this to the computer when it explicitly said NUMBER BETWEEN 1 AND 100!: ")
+        print("Well now you're going WAY over the roof. I can't take this to the computer when it explicitly said NUMBER BETWEEN 1 AND 100!")
     elif user_guess < 1:
-        print("Your guess is WAY too low. I can't take this to the computer when it explicitly said NUMBER BETWEEN 1 AND 100!: ")
+        print("Your guess is WAY too low. I can't take this to the computer when it explicitly said NUMBER BETWEEN 1 AND 100!")
     else:
         pass
-    
-    
+
+
 def check_user_input(guess):
     
     user_guess = input(guess)
@@ -48,3 +48,8 @@ def check_user_input(guess):
             result = str(user_guess)
     finally:
         return result
+
+
+def user_lost(answer):
+    print("\nReally, after all of those tips you weren't able to figure it out. Are you high or something? \U0001F974")
+    print(f"The answer was obviously {answer}.")
