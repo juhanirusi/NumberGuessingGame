@@ -3,6 +3,10 @@ import user_hints
 import difficulty
 import input_messages
 
+# Try to add an user interface to this project...
+# https://docs.python.org/3/library/tkinter.html
+# Google --> "adding user interface in python"
+
 def game():
 
     answer = random.randint(1, 100)
