@@ -1,6 +1,6 @@
-EASY_LEVEL_TURNS = 4
-MEDIUM_LEVEL_TURNS = 3
-HARD_LEVEL_TURNS = 2
+EASY_LEVEL_TURNS = 5
+MEDIUM_LEVEL_TURNS = 4
+HARD_LEVEL_TURNS = 3
 
 def difficulty_level(user_input):
 
@@ -13,5 +13,5 @@ def difficulty_level(user_input):
     elif difficulty == 'hard':
         return HARD_LEVEL_TURNS
     else:
-        print("Your input isn't quite what I was expecting, so I'll set the difficulty to 'easy'.")
+        print("Your input wasn't quite what I was expecting, so I'll set the difficulty to 'easy'.")
         return EASY_LEVEL_TURNS
