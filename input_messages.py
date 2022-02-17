@@ -1,3 +1,5 @@
+import time
+
 def wrong_game_input(wrong_game_inputs):
     """
     If the user inputs something else than 'yes' or 'no' to the play_game input these messages are shown
@@ -50,6 +52,20 @@ def check_user_input(guess):
         return result
 
 
-def user_lost(answer):
-    print("\nReally, after all of those tips you weren't able to figure it out. Are you high or something? \U0001F974")
-    print(f"The answer was obviously {answer}.")
+def wait_time(guesses, guesses_left):
+    time.sleep(0.7)
+
+    if guesses == 3:
+        print("""\nOk, they say "the third time is the charm", so let's see if it's true...\n""")
+    elif guesses == 2:
+        print("\nOk, let me check your second guess, just wait a second...\n")
+    elif guesses == 1:
+        print("\nOk, let me check...\n")
+    else:
+        print("\nJust a second...\n")
+    if guesses_left == 0:
+        time.sleep(1)
+        print("Drumroll please \U0001F941\U0001F941\U0001F941\U0001F941\U0001F941...\n")
+        time.sleep(1)
+
+    time.sleep(2)
