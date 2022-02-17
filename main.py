@@ -13,6 +13,10 @@ def game(play_game):
     # TODO DELETE AFTER FINISHED PROJECT!
     print("\nThe computer generated this number:", answer, "\n")
 
+    # Just a list of numbers that have specific hints on them.
+    # Check user_hints.py --> famous_number_hint() to get the idea!
+    famous_numbers = [8, 99]
+
     difficulty_not_set = True
     wrong_game_inputs = 0
     user_plays_game = True
@@ -73,7 +77,8 @@ def game(play_game):
                         user_hints.user_hint_1(answer, user_guess)
                     elif user_hint == 2:
                         user_hints.user_hint_2(answer, user_guess)
-                        user_hints.famous_number_hint(answer)
+                        if answer in famous_numbers:
+                            user_hints.famous_number_hint(answer)
                     elif user_hint >= 3:
                         user_hints.user_hint_3(answer, user_guess)
                 elif user_guess == answer:
