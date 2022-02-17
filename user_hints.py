@@ -14,31 +14,43 @@ def user_hint_1(answer, user_guess):
             to_number = num_range[1]
 
     if user_guess in range(from_number, to_number):
-        print(f"\nNot quite. But you're right, the number is between {from_number} and {to_number}.")
+        print(f"Not quite. But you're right, the number is between {from_number} and {to_number}.")
     else:
-        print(f"\nNope. Let me give you the first hint, the number is between {from_number} and {to_number}.")
+        print(f"Nope. Let me give you a hint, the number is between {from_number} and {to_number}.")
         
+
 # Function for the second user hint --> user_hints.user_hint_2(number, user_guess)
 def user_hint_2(answer, user_guess):
     """
     Checks whether the random number is an even or uneven number,
-    and is the user input an even or uneven number
+    and is the user input an even or uneven number.
 
     After that, based on user input, the function shows a proper message to help the user move forward in the game.
     """
-    is_even_number = answer % 2
-    if is_even_number == 0:
+    
+    if answer % 2 == 0:
         if user_guess % 2 == 0:
-            print("\nThat's not the right number. But you're right, the number IS an even number.")
+            print("That's not the right number. But you're right, the number IS an even number.")
         else:
-            print("\nNope. My next tip is that the number IS an even number.")
+            print("Nope. My next tip is that the number IS an even number.")
     else:
         if user_guess % 2 == 0:
-            print("\nNope. My next tip is that the number ISN'T an even number.")
+            print("Nope. My next tip is that the number ISN'T an even number.")
         else:
-            print("\nThat's not the right number. But you're right, the number ISN'T an even number.")
+            print("That's not the right number. But you're right, the number ISN'T an even number.")
 
-# HINT THAT TELLS THE USER WHAT ONE NUMBER (INT) THERE IS IN THE NUMBER IF ANSWER LARGER THAN 9
-def user_hint_3(answer):
-    print(f"\nOk, this is my last tip, the last number of the answer is {answer % 10}.")
-    print("I bet that you're now able to figure it out. \U0001F609")
+
+# HINT THAT TELLS THE USER IF THE THEIR GUESS IS HIGHER OR LOWER THAN THE CORRECT ANSWER
+def user_hint_3(answer, user_guess):
+    if user_guess < answer:
+        print("That's not the correct answer either. The correct answer is HIGHER than your guess.")
+    else:
+        print("That's not the correct answer either. The correct answer is LOWER than your guess.")
+
+
+# A HINT THAT TELLS THE USER IF THE NUMBER IS FAMOUS FROM SOMEWHERE
+def famous_number_hint(answer):
+    if answer == 99:
+        print("\n\U0001F4A1 EXTRA HINT! This number is also the jersey number of the most successful ice hockey player \U0001F4A1\n")
+    else:
+        pass
