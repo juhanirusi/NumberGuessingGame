@@ -50,7 +50,10 @@ def user_hint_3(answer, user_guess):
 
 # A HINT THAT TELLS THE USER IF THE NUMBER IS FAMOUS FROM SOMEWHERE
 def famous_number_hint(answer):
-    if answer == 99:
-        print("\n\U0001F4A1 EXTRA HINT! This number is also the jersey number of the most successful ice hockey player \U0001F4A1\n")
-    else:
-        pass
+    match answer:
+        case 99:
+            print("\n\U0001F4A1 EXTRA HINT! This number is also the jersey number of the most successful ice hockey player \U0001F4A1\n")
+        case 8:
+            print("\n\U0001F4A1 EXTRA HINT! Turning this number sideways will resemble the infinity symbol \U0001F4A1\n")
+        case _:
+            pass # This is done if answer is not found --> JUST IN CASE!
