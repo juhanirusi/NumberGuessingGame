@@ -3,18 +3,15 @@ import user_hints
 import difficulty
 import input_messages
 
-# Try to add an user interface to this project...
-# https://docs.python.org/3/library/tkinter.html
-# Google --> "adding user interface in python"
-
-def game():
+def game(play_game):
+    """
+    This is the function for the main functionality of our game.
+    """
 
     answer = random.randint(1, 100)
 
+    # TODO DELETE AFTER FINISHED PROJECT!
     print("\nThe computer generated this number:", answer, "\n")
-
-    # TODO Run only once --> AFTER RESTARTING DON'T RUN THIS CODE!
-    play_game = str(input("Do you want to play a game? 'yes' or 'no': ")).lower()
 
     difficulty_not_set = True
     wrong_game_inputs = 0
@@ -26,12 +23,12 @@ def game():
 
     def restart():
         """
-        The function for restarting the program (if the user wants to).
+        The function for restarting the program... if the user wants to.
         """
 
         global user_plays_game
 
-        restart = input("Would you like to restart the game, and erase the computer's memory? ")
+        restart = input("Would you like to erase the computer's memory and restart the game? 'yes' or 'no': ")
         if restart in ('y', 'yup', 'yes'):
             game()
         elif restart in ('n', 'no', 'nope'):
@@ -40,6 +37,7 @@ def game():
         else:
             user_plays_game = False
             print("Your input was confusing. Therefore I'll end the whole program.")
+
 
     while user_plays_game:
         if play_game in ('y', 'yup', 'yes'):
@@ -54,14 +52,16 @@ def game():
                 if guesses_left == 1:
                     print(f"You only have {guesses_left} attempt remaining. MAKE IT COUNT!")
                 elif guesses_left > 1:
-                    print(f"You have still {guesses_left} attempts remaining to guess the right number.")
+                    print(f"You still have {guesses_left} attempts remaining to guess the right number.")
                 user_guess = input_messages.check_user_input("\nGuess again: ")
 
             guesses_left -= 1
             guesses += 1
 
+            input_messages.wait_time(guesses, guesses_left)
+
             if guesses_left <= 0 and user_guess != answer:
-                print("\nOh no, you've ran out of guesses, and therefore, lost the game. \U0001F61E")
+                print("Oh no, your guess was wrong and you've ran out of guesses, so you lost the game. \U0001F61E")
                 restart()
                 break
 
@@ -73,10 +73,11 @@ def game():
                         user_hints.user_hint_1(answer, user_guess)
                     elif user_hint == 2:
                         user_hints.user_hint_2(answer, user_guess)
-                    elif user_hint == 3 and answer >= 10:
-                        user_hints.user_hint_3(answer)
+                        user_hints.famous_number_hint(answer)
+                    elif user_hint >= 3:
+                        user_hints.user_hint_3(answer, user_guess)
                 elif user_guess == answer:
-                    print(f"\nCONGRATULATIONS! You guessed the number right it was {answer}. The computer praises you! \U0001F64C")
+                    print(f"CONGRATULATIONS! You guessed the number right, it was {answer}. The computer praises you! \U0001F64C")
                     if guesses == 1:
                         print(f"You got the number right with your first guess. THAT'S ASTONISHING, even the computer is amazed \U0001F632 \n")
                     else:
@@ -115,4 +116,6 @@ def game():
                 play_game = input("Simply type 'yes' if you want to play and 'no' if you don't: ").lower()
 
 
-game()
+if __name__ == "__main__":
+    play_game = str(input("Do you want to play a game? 'yes' or 'no': ")).lower()
+    game(play_game)
