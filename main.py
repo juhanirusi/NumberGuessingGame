@@ -13,9 +13,9 @@ def game(play_game):
     # TODO DELETE AFTER FINISHED PROJECT!
     print("\nThe computer generated this number:", answer, "\n")
 
-    # Just a list of numbers that have specific hints on them.
+    # Just a set of numbers that have specific hints on them.
     # Check user_hints.py --> famous_number_hint() to get the idea!
-    famous_numbers = [8, 99]
+    famous_numbers = {8, 99}
 
     difficulty_not_set = True
     wrong_game_inputs = 0
