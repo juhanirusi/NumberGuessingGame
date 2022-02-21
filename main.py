@@ -17,13 +17,9 @@ def game(play_game):
     # Check user_hints.py --> famous_number_hint() to get the idea!
     famous_numbers = {8, 99}
 
-    difficulty_not_set = True
-    wrong_game_inputs = 0
-    user_plays_game = True
-    first_no_input = True
-    first_guess = True
-    user_hint = 0
-    guesses = 0
+    # Assign multiple variables to the same value
+    difficulty_not_set = user_plays_game = first_no_input = first_guess = True
+    wrong_game_inputs = user_hint = guesses = 0
 
     def restart():
         """
@@ -34,7 +30,7 @@ def game(play_game):
 
         restart = input("Would you like to erase the computer's memory and restart the game? 'yes' or 'no': ")
         if restart in ('y', 'yup', 'yes'):
-            game()
+            game(play_game)
         elif restart in ('n', 'no', 'nope'):
             user_plays_game = False
             print("Ok, I'll quit the program. Goodbye.")
