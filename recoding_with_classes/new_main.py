@@ -1,11 +1,9 @@
-from with_classes_test import CheckAnswer
-import random
+from with_classes_test import CheckInput
 
-answer = random.randint(1, 100)
+is_user_input_valid = CheckInput()
 
-#play_game = str(input("Do you want to play a game? 'yes' or 'no': ")).lower()
-
-user_guess = input("Enter your guess ")
-
-check_answer = CheckAnswer(answer, user_guess)
-check_answer.check_user_input(user_guess)
+guess = input("Make a guess: ")
+if is_user_input_valid.check_user_input(guess):
+    print("Input value: VALID")
+else:
+    print("Input value: NOT VALID")
