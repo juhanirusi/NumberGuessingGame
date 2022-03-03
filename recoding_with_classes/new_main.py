@@ -1,4 +1,4 @@
-from with_classes_test import CheckInput
+from check_input_type import CheckInput
 
 is_user_input_valid = CheckInput()
 

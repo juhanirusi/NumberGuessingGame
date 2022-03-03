@@ -1,8 +1,4 @@
 class CheckInput:
-    def __init__(self):
-        self.guess = None
-
-    # REMEMBER, YOU NEED TO RETURN FROM THE SAME FUNCTION THAT YOU CALL FROM THE CLASS!
     def check_user_input(self, guess):
         try:
             guess = int(guess)
@@ -16,6 +12,7 @@ class CheckInput:
                 return True
             else:
                 return False
+
 
     def check_input_type(self, guess):
         if type(guess) == float:
