@@ -1,6 +1,6 @@
 from check_input_type import CheckInput
 from difficulty_class import Set_Difficulty
-from input_messages_class import InputMessages
+from messages_class import InputMessages
 
 user_input_valid = CheckInput()
 set_difficulty = Set_Difficulty()
@@ -18,7 +18,7 @@ class GameManager():
     def play_game(self, play_game):
         if play_game in ('y', 'yup', 'yes'):
             self.answer = random.randint(1, 100)
-            print(self.answer)
+            print(self.answer) # TODO DELETE LATER!
             self.input_message = InputMessages()
             self.guesses_left = set_difficulty.difficulty_level()
             print("Ok, the computer challenges you to guess a number between 1 and 100...")
@@ -32,18 +32,28 @@ class GameManager():
 
 
     def guess_number(self):
-        while self.game_on and self.guesses_left >= 1:
+        while self.game_on:
+            
+            self.input_message.guesses_left_message(self.guesses_left)
+            
+            self.guesses_left -= 1
             guess = input("Make a guess: ")
-            if user_input_valid.check_user_input(guess):
+            print(self.guesses_left) # TODO DELETE LATER
+
+            if user_input_valid.check_user_input(guess) and self.guesses_left >= 0:
                 self.input_message.wait_time(self.guesses_left)
                 guess = int(guess)
                 if guess == self.answer:
-                    print("THAT'S THE CORRECT ANSWER!")
-                    self.game_on = False
-                else:
+                    print(f"YES! YOU'RE RIGHT, THE ANSWER WAS: {self.answer}")
+                    break
+                elif guess != self.answer and self.guesses_left > 0:
                     self.input_message.user_hint(self.answer, guess)
-            
-            self.guesses_left -= 1
+
+            if self.guesses_left == 0:
+                print("Oh no, you've ran out of guesses and therefore, lost the game.")
+                print(f"The answer we were looking for was: {self.answer}")
+                print("Better luck next time!")
+                break
 
 
     def restart(self):
