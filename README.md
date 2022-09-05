@@ -1,4 +1,4 @@
-# NumberGuessingGame
+# Number Guessing Game
 
 Here's a Python "number guessing" game where you're trying to guess a random number that the computer has generated and the computer will give hints and different messages based on the user input.
 
