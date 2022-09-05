@@ -17,14 +17,14 @@ class GameManager():
     def play_game(self, play_game):
         self.input_message = InputMessages()
 
-        if play_game in ('y', 'yup', 'yes'):
+        if play_game in ('y', 'yup', 'yes', 'yeah'):
             self.answer = random.randint(1, 100)
             print(self.answer)  # TODO DELETE LATER!
             self.guesses_left = set_difficulty.difficulty_level()
             print(
                 "Ok, the computer challenges you to guess a number between 1 and 100...")
             self.guess_number()
-        elif play_game in ('n', 'no', 'nope'):
+        elif play_game in ('n', 'no', 'nope', 'no way'):
             print("Okay, I understand, see you next time.")
         else:
             print("Your input was confusing, I assume you don't want to play then.")
