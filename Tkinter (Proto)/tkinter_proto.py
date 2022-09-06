@@ -8,25 +8,23 @@ LIGHT_YELLOW = '#FFE873'
 DARK_YELLOW = '#FFD43B'
 
 GRAY = '#646464'
+WHITE = '#ffffff'
 
 
 class StartGame:
     def __init__(self, window):
         self.window = window
-        self.label = Label(text="Do you want to play the game? 'yes' or 'no'?")
-        self.label.grid(row=1, column=1)
-        self.button = Button(
-            text="BUTTON", highlightthickness=0, command=self.change_window_color)
-
-        self.button.grid(row=1, column=1, padx=10, pady=10)
+        self.label = Label(text="Do you want to play the game? 'yes' or 'no'?", bg=LIGHT_BLUE, fg=WHITE, font=("Courier", 24)).place(relx=0.5, rely=0.1, anchor=CENTER)
+        self.entry = Entry(window, width=20, font=('Arial', 24)).place(relx=0.5, rely=0.4, anchor=CENTER)
+        self.button = Button(text="SUBMIT", command=self.change_window_color).place(relx=0.5, rely=0.6, anchor=CENTER)
 
     def change_window_color(self):
         window.config(bg=DARK_YELLOW)
 
 
 def center_window_on_screen(width=1100, height=650):
-    screen_width = window.winfo_screenwidth()  # Get screen width
-    screen_height = window.winfo_screenheight()  # Get screen height
+    screen_width = window.winfo_screenwidth() # Get screen width
+    screen_height = window.winfo_screenheight() # Get screen height
 
     # calculate position x and y coordinates
     x = (screen_width / 2) - (width / 2)
