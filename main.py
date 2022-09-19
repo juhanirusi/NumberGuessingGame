@@ -8,7 +8,7 @@ user_input_valid = CheckInput()
 set_difficulty = Set_Difficulty()
 
 
-class GameManager():
+class GameManager:
     """
     Our game manager class that is responsible for starting the
     game, keeping the game on, restarting the game if the user wants
@@ -33,10 +33,8 @@ class GameManager():
 
         if play_game in ('y', 'yup', 'yes', 'yeah'):
             self.answer = random.randint(1, 100)
-            print(self.answer)
             self.guesses_left = set_difficulty.difficulty_level()
-            print(
-                "Ok, the computer challenges you to guess a number between 1 and 100...")
+            print("Ok, the computer challenges you to guess a number between 1 and 100...")
             self.guess_number()
         elif play_game in ('n', 'no', 'nope', 'no way'):
             print("Okay, I understand, see you next time.")
@@ -52,9 +50,9 @@ class GameManager():
 
             self.guesses_left -= 1
             guess = input("Make a guess: ")
-            #print(self.guesses_left)
 
             if user_input_valid.check_user_input(guess) and self.guesses_left >= 0:
+                guess = int(guess)
                 self.input_message.wait_time(self.guesses_left)
 
                 if int(guess) == self.answer:

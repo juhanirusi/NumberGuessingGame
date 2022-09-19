@@ -8,7 +8,13 @@ FAMOUS_NUMBERS = {8, 99}
 
 
 class InputMessages(UserHints):
+    """
+    Our input messages that trigger when the user tries
+    to guess a number and shows them how many guesses
+    they still have left.
+    """
     def __init__(self):
+        """Keeps track of the number of guesses the user has made and declares the super init, so the """
         self.user_guesses = 0
         super().__init__()
 
@@ -38,6 +44,9 @@ class InputMessages(UserHints):
         time.sleep(2)
 
     def user_hint(self, answer, guess):
+
+        int(guess)
+
         if self.user_guesses == 1:
             user_hints.user_hint_1(answer, guess)
             if answer in FAMOUS_NUMBERS:
