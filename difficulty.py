@@ -4,10 +4,17 @@ HARD_LEVEL_TURNS = 3
 
 
 class Set_Difficulty:
-    def difficulty_level(self):
+    """Controls the difficulty level of our game."""
 
-        difficulty = input(
-            "Choose a difficulty. Type 'easy', 'medium' or 'hard': ").lower()
+    def difficulty_level(self):
+        """
+        Is used to ask the user what difficulty level they
+        want to play with. If the user input isn't one of
+        the pretermined strings, the method will automatically
+        set the difficulty level to easy.
+        """
+
+        difficulty = input("Choose a difficulty. Type 'easy', 'medium' or 'hard': ").lower()
 
         if difficulty == 'easy':
             return EASY_LEVEL_TURNS
@@ -16,6 +23,5 @@ class Set_Difficulty:
         elif difficulty == 'hard':
             return HARD_LEVEL_TURNS
         else:
-            print(
-                "Your input wasn't quite what I was expecting, so I'll set the difficulty to 'easy'.")
+            print("Your input wasn't quite what I was expecting, so I'll set the difficulty to 'easy'.")
             return EASY_LEVEL_TURNS

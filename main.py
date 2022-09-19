@@ -9,17 +9,31 @@ set_difficulty = Set_Difficulty()
 
 
 class GameManager():
+    """
+    Our game manager class that is responsible for starting the
+    game, keeping the game on, restarting the game if the user wants
+    to, and calling the appropriate methods to calculate whether the
+    user can still play the game and show messages to the user depending
+    on the user inputs.
+    """
+
     def __init__(self):
+        """"Our init that holds the variables needed throughout the game"""
         self.answer = 0
         self.guesses_left = None
         self.game_on = True
 
     def play_game(self, play_game):
+        """
+        A method we call when the game starts the first
+        time that starts or ends the game based on the user
+        input and after the game is over, calls the restart method.
+        """
         self.input_message = InputMessages()
 
         if play_game in ('y', 'yup', 'yes', 'yeah'):
             self.answer = random.randint(1, 100)
-            print(self.answer)  # TODO DELETE LATER!
+            print(self.answer)
             self.guesses_left = set_difficulty.difficulty_level()
             print(
                 "Ok, the computer challenges you to guess a number between 1 and 100...")
@@ -38,7 +52,7 @@ class GameManager():
 
             self.guesses_left -= 1
             guess = input("Make a guess: ")
-            print(self.guesses_left)  # TODO DELETE LATER
+            #print(self.guesses_left)
 
             if user_input_valid.check_user_input(guess) and self.guesses_left >= 0:
                 self.input_message.wait_time(self.guesses_left)
@@ -56,8 +70,13 @@ class GameManager():
                 break
 
     def restart(self):
-        restart = input(
-            "Would you like to erase the computer's memory and restart the game? 'yes' or 'no': ")
+        """
+        Is used to restart the game when the game is over,
+        it gives the user a chance to restart the game or
+        end it based on their input.
+        """
+        restart = input("Would you like to erase the computer's memory and restart the game? 'yes' or 'no': ")
+
         if restart in ('y', 'yup', 'yes'):
             self.game_on = True
             self.play_game(play_game="yes")
