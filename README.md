@@ -1,5 +1,5 @@
 # Number Guessing Game
 
-Here's a "number guessing" game made with Python where you're trying to guess a random number that the computer has generated and the computer will give hints and different messages based on the user input.
+Here's a simple "number guessing" game made with Python where you're trying to guess a random number that the computer has generated and the computer will give hints and different messages based on the user input.
 
-The program is pretty simple and is meant to be used from the terminal of the IDE.
+The program is pretty simple and is meant to be used from the terminal of the IDE, and you aren't required to install any Python packages.
